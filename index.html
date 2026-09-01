@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AC米兰 2026-2027 数据中心</title>
+<style>
+:root{--milan:#e4002b;--bg:#0b0c10;--panel:#14161d;--panel2:#1b1e27;--line:#272b38;--txt:#eef0f5;--mut:#9aa3b2;--win:#36d399;--lose:#f87272;--draw:#fbbd23;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.5;padding:0 0 60px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:10;background:linear-gradient(180deg,#161019,#0b0c10 92%);border-bottom:2px solid var(--milan);padding:14px 0 10px;backdrop-filter:blur(8px)}
+.hrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:46px;height:46px;border-radius:50%;background:var(--milan);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 3px rgba(228,0,43,.18);overflow:hidden;border:2px solid rgba(255,255,255,.12)}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
+h1{font-size:19px;letter-spacing:.5px}.sub{color:var(--mut);font-size:12px;margin-top:2px}
+.chips{margin-left:auto;display:flex;gap:10px}
+.chip{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:6px 12px;text-align:center}
+.chip b{display:block;font-size:16px;color:var(--milan)}.chip span{font-size:10px;color:var(--mut)}
+.tabs{display:flex;gap:8px;margin:12px 0 0;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;padding:8px 15px;border:1px solid var(--line);border-radius:22px;background:var(--panel);color:var(--mut);cursor:pointer;font-size:13px;white-space:nowrap;transition:.15s}
+.tab:hover{border-color:var(--milan)}
+.tab.on{background:var(--milan);color:#fff;border-color:var(--milan);font-weight:600}
+.upd{color:var(--mut);font-size:11px;margin:4px 0 10px}
+.next{background:linear-gradient(135deg,#241318,#14161d);border:1px solid var(--milan);border-radius:14px;padding:12px 16px;margin:10px 0 0}
+.next .lbl{color:var(--milan);font-size:11px;font-weight:700;letter-spacing:1.5px}
+.next .cd{font-size:21px;font-weight:800;margin-top:4px}
+.next .meta{color:var(--mut);font-size:13px;margin-top:4px}
+.seg{font-size:13px;color:var(--mut);margin:16px 0 8px;font-weight:700;letter-spacing:1px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:grid;grid-template-columns:84px 1fr auto 1fr;grid-template-areas:"when hteam mid ateam" "meta meta meta meta";column-gap:14px;row-gap:0;align-items:center;transition:.15s}
+.card:hover{border-color:#3a3f50}
+.card .when{grid-area:when;width:84px;text-align:center;border-right:1px solid var(--line);padding-right:10px;line-height:1.3}
+.card .when .d{font-size:14px;font-weight:700}
+.card .when .t{font-size:12px;color:var(--mut);margin-top:1px}
+.card .when .c{font-size:10px;color:var(--mut);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .hteam{grid-area:hteam;display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:0}
+.card .ateam{grid-area:ateam;display:flex;align-items:center;gap:8px;justify-content:flex-start;min-width:0}
+.card .hteam .nm,.card .ateam .nm{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.card .mid{grid-area:mid;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:60px}
+.card .meta{grid-area:meta;color:var(--mut);font-size:11px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:8px;margin-top:8px}
+.badge{position:relative;width:32px;height:32px;border-radius:50%;background:var(--panel2);display:flex;align-items:center;justify-content:center;flex:none;flex-shrink:0;overflow:hidden}
+.badge .ini{font-size:13px;font-weight:800;color:var(--txt);line-height:1;letter-spacing:-.5px}
+.badge img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.badge.ld .ini{display:none}
+.badge.ld img{display:block}
+.badge.acm{background:var(--milan)}
+.badge.acm .ini{color:#fff}
+td.tm .badge{width:32px;height:32px}
+.score{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums;padding:0 4px;white-space:nowrap}
+.vs{color:var(--mut);font-size:14px;font-weight:700}
+.res{font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px}
+.res.W{background:rgba(54,211,153,.16);color:var(--win)}.res.L{background:rgba(248,114,114,.16);color:var(--lose)}.res.D{background:rgba(251,189,35,.16);color:var(--draw)}.res.LIVE{background:rgba(228,0,43,.2);color:#ff8aa0}
+.exp{background:var(--panel2);border:1px solid var(--line);color:var(--txt);border-radius:8px;padding:4px 10px;font-size:11px;cursor:pointer}.exp:hover{border-color:var(--milan)}
+.det{grid-column:1/-1;margin-top:4px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px}
+.goal{padding:3px 0;color:var(--txt)}.goal.mine{color:#ffd9e1}.goal .as{color:var(--mut);font-size:11px}
+.empty{color:var(--mut);text-align:center;padding:30px;font-size:13px}
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table.st{width:100%;border-collapse:collapse;font-size:13px;min-width:400px}
+table.st th{position:sticky;top:0;background:var(--panel2);color:var(--mut);font-weight:600;padding:10px 8px;text-align:center;font-size:11px;border-bottom:1px solid var(--line)}
+table.st td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line);white-space:nowrap}
+table.st tr:last-child td{border-bottom:none}
+table.st td.tm{text-align:left;display:flex;align-items:center;gap:8px}
+table.st td.rk{font-weight:700;color:var(--mut);width:36px}
+table.st td.wdl{font-variant-numeric:tabular-nums}
+table.st td.gl{font-variant-numeric:tabular-nums;color:var(--mut)}
+table.st td.pts{font-weight:800;color:var(--milan);font-size:15px;width:48px}
+table.st tr.me{background:rgba(228,0,43,.10)}
+table.st tr.me td.rk{color:var(--milan)}
+table.st tr.me td.tm .nm{color:#ff6d87}
+.squad{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.squad{grid-template-columns:1fr}.chips{width:100%;margin-left:0;justify-content:flex-start}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.ph{font-weight:700;font-size:14px;margin-bottom:10px;color:var(--milan)}
+.lb{display:flex;align-items:center;gap:10px;padding:6px 0}
+.lb .rn{width:20px;height:20px;border-radius:50%;background:var(--panel2);color:var(--mut);font-size:11px;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700}
+.lb .nm{flex:1;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb .bar{flex:2;height:7px;background:var(--panel2);border-radius:4px;overflow:hidden}
+.lb .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--milan),#ff5b78)}
+.lb .ct{width:24px;text-align:right;font-weight:700;font-size:13px}
+.ov{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.ov .o{flex:1;min-width:84px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center}
+.ov .o b{display:block;font-size:20px;color:var(--milan);font-variant-numeric:tabular-nums}
+.ov .o span{font-size:11px;color:var(--mut)}
+.ov .o .last5{margin-top:6px;font-size:12px;letter-spacing:2px;color:var(--mut)}
+.king{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.king .kh{font-weight:700;font-size:14px;color:var(--milan);margin-bottom:6px}
+.krow{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.krow:last-child{border-bottom:none}
+.krow .kstat{width:60px;flex:none;color:var(--mut);font-size:13px;text-align:right}
+.krow .pchip{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:4px 12px;font-size:13px;white-space:nowrap}
+.krow .kval{margin-left:auto;font-weight:800;font-size:14px;color:var(--milan);font-variant-numeric:tabular-nums;flex:none}
+table.bt{width:100%;border-collapse:collapse;font-size:13px;min-width:320px}
+table.bt th{background:var(--panel2);color:var(--mut);font-weight:600;padding:9px 10px;text-align:right;font-size:11px;border-bottom:1px solid var(--line);white-space:nowrap}
+table.bt th:first-child{text-align:left}
+table.bt td{padding:8px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;font-variant-numeric:tabular-nums}
+table.bt td:first-child{text-align:left;color:var(--txt)}
+table.bt tr:last-child td{border-bottom:none}
+table.bt td.brk{color:var(--milan);font-weight:700}
+table.bt td.bval{font-weight:700}
+.foot{color:var(--mut);font-size:11px;text-align:center;margin-top:26px}
+a{color:var(--milan);text-decoration:none}
+</style></head><body>
+<div class="wrap">
+<header><div class="hrow">
+<div class="logo"><img src="assets/5b7b126751fe.png" alt="AC米兰"></div>
+<div><h1>AC米兰 · 2026-2027</h1><div class="sub">赛程 · 赛果 · 积分 · 队内榜 · 数据分析</div></div>
+<div class="chips"><div class="chip"><b>2-0-0</b><span>战绩(胜-平-负)</span></div><div class="chip"><b>3</b><span>联赛排名</span></div></div>
+</div>
+<div class="next" id="nextBox" style="display:none"></div>
+<div class="tabs">
+<button class="tab on" data-f="all">全部</button>
+<button class="tab" data-f="pre">赛程</button>
+<button class="tab" data-f="post">赛果</button>
+<button class="tab" data-f="standings">积分榜</button>
+<button class="tab" data-f="squad">队内榜</button>
+<button class="tab" data-f="analysis">数据分析</button>
+</div>
+</header>
+<div class="upd" id="upd"></div>
+<div id="list"></div>
+<div class="foot">赛程/赛果来源 直播吧 · 积分榜/队内数据王来源 腾讯体育 · 队内进球来源 百度体育 · 页面由本地脚本离线生成（无前端外部请求）</div>
+</div>
+<script>
+const DATA = {"schedule": {"updated": "2026-09-01T01:05:14.284406+00:00", "team": "2-0-0", "standing": 3, "events": [{"id": "2649434", "date": "2026-08-23T18:45:00Z", "round": "1", "competition": "意甲", "state": "post", "isHome": false, "milan": {"name": "AC米兰", "score": 2, "winner": true, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "都灵", "abbr": "", "score": 1, "winner": false, "logo": "assets/5d5c2b9cef74.png"}, "zb_date": "2026-08-24", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057386v.htm"}, {"id": "2649446", "date": "2026-08-28T18:45:00Z", "round": "2", "competition": "意甲", "state": "post", "isHome": true, "milan": {"name": "AC米兰", "score": 2, "winner": true, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "威尼斯", "abbr": "", "score": 0, "winner": false, "logo": "assets/bb2f13e787fc.png"}, "zb_date": "2026-08-29", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057398v.htm"}, {"id": "2649458", "date": "2026-09-06T18:45:00Z", "round": "3", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "尤文图斯", "abbr": "", "score": null, "winner": false, "logo": "assets/8bcf6efcff77.png"}, "zb_date": "2026-09-07", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057410v.htm"}, {"id": "2649469", "date": "2026-09-12T16:00:00Z", "round": "4", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "拉齐奥", "abbr": "", "score": null, "winner": false, "logo": "assets/0a6d861eda83.png"}, "zb_date": "2026-09-13", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057421v.htm"}, {"id": "2649480", "date": "2026-09-20T18:45:00Z", "round": "5", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "莱切", "abbr": "", "score": null, "winner": false, "logo": "assets/5f93a144547a.png"}, "zb_date": "2026-09-21", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057432v.htm"}, {"id": "2649491", "date": "2026-10-11T16:30:00Z", "round": "6", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "萨索洛", "abbr": "", "score": null, "winner": false, "logo": "assets/fff724db5ce2.png"}, "zb_date": "2026-10-12", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057443v.htm"}, {"id": "2649500", "date": "2026-10-18T16:30:00Z", "round": "7", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "亚特兰大", "abbr": "", "score": null, "winner": false, "logo": "assets/5b92f5453a65.png"}, "zb_date": "2026-10-19", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057452v.htm"}, {"id": "2649509", "date": "2026-10-25T17:30:00Z", "round": "8", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "乌迪内斯", "abbr": "", "score": null, "winner": false, "logo": "assets/b3594f65d5e2.png"}, "zb_date": "2026-10-26", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057461v.htm"}, {"id": "2649515", "date": "2026-10-28T17:30:00Z", "round": "9", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "博洛尼亚", "abbr": "", "score": null, "winner": false, "logo": "assets/e59d0ea43d18.png"}, "zb_date": "2026-10-29", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057467v.htm"}, {"id": "2649530", "date": "2026-11-01T17:30:00Z", "round": "10", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "国际米兰", "abbr": "", "score": null, "winner": false, "logo": "assets/d7dc55eebe25.png"}, "zb_date": "2026-11-02", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057482v.htm"}, {"id": "2649539", "date": "2026-11-08T17:30:00Z", "round": "11", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "热那亚", "abbr": "", "score": null, "winner": false, "logo": "assets/198e5a6965f3.png"}, "zb_date": "2026-11-09", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057491v.htm"}, {"id": "2649551", "date": "2026-11-22T17:30:00Z", "round": "12", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "弗洛西诺内", "abbr": "", "score": null, "winner": false, "logo": "assets/58080726a67a.png"}, "zb_date": "2026-11-23", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057503v.htm"}, {"id": "2649553", "date": "2026-11-29T17:30:00Z", "round": "13", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "卡利亚里", "abbr": "", "score": null, "winner": false, "logo": "assets/1e2982dbc4e2.png"}, "zb_date": "2026-11-30", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057505v.htm"}, {"id": "2649563", "date": "2026-12-06T17:30:00Z", "round": "14", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "帕尔马", "abbr": "", "score": null, "winner": false, "logo": "assets/7a0ff388e85d.png"}, "zb_date": "2026-12-07", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057515v.htm"}, {"id": "2649575", "date": "2026-12-13T17:30:00Z", "round": "15", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "那不勒斯", "abbr": "", "score": null, "winner": false, "logo": "assets/40c9709a2ce7.png"}, "zb_date": "2026-12-14", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057527v.htm"}, {"id": "2649590", "date": "2026-12-20T17:30:00Z", "round": "16", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "科莫", "abbr": "", "score": null, "winner": false, "logo": "assets/13bc3a48150a.png"}, "zb_date": "2026-12-21", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2026/match2057542v.htm"}, {"id": "2649601", "date": "2027-01-03T17:30:00Z", "round": "17", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "蒙扎", "abbr": "", "score": null, "winner": false, "logo": "assets/b51c6bb1e730.png"}, "zb_date": "2027-01-04", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057553v.htm"}, {"id": "2649608", "date": "2027-01-06T17:30:00Z", "round": "18", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "佛罗伦萨", "abbr": "", "score": null, "winner": false, "logo": "assets/f0da3683822d.png"}, "zb_date": "2027-01-07", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057560v.htm"}, {"id": "2649625", "date": "2027-01-10T17:30:00Z", "round": "19", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "罗马", "abbr": "", "score": null, "winner": false, "logo": "assets/5e137990bd43.png"}, "zb_date": "2027-01-11", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057577v.htm"}, {"id": "2649631", "date": "2027-01-17T17:30:00Z", "round": "20", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "都灵", "abbr": "", "score": null, "winner": false, "logo": "assets/5d5c2b9cef74.png"}, "zb_date": "2027-01-18", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057583v.htm"}, {"id": "2649641", "date": "2027-01-24T17:30:00Z", "round": "21", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "弗洛西诺内", "abbr": "", "score": null, "winner": false, "logo": "assets/58080726a67a.png"}, "zb_date": "2027-01-25", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057593v.htm"}, {"id": "2649648", "date": "2027-01-31T17:30:00Z", "round": "22", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "尤文图斯", "abbr": "", "score": null, "winner": false, "logo": "assets/8bcf6efcff77.png"}, "zb_date": "2027-02-01", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057600v.htm"}, {"id": "2649658", "date": "2027-02-07T17:30:00Z", "round": "23", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "博洛尼亚", "abbr": "", "score": null, "winner": false, "logo": "assets/e59d0ea43d18.png"}, "zb_date": "2027-02-08", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057610v.htm"}, {"id": "2649673", "date": "2027-02-14T17:30:00Z", "round": "24", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "国际米兰", "abbr": "", "score": null, "winner": false, "logo": "assets/d7dc55eebe25.png"}, "zb_date": "2027-02-15", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057625v.htm"}, {"id": "2649680", "date": "2027-02-21T17:30:00Z", "round": "25", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "热那亚", "abbr": "", "score": null, "winner": false, "logo": "assets/198e5a6965f3.png"}, "zb_date": "2027-02-22", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057632v.htm"}, {"id": "2649691", "date": "2027-02-28T17:30:00Z", "round": "26", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "科莫", "abbr": "", "score": null, "winner": false, "logo": "assets/13bc3a48150a.png"}, "zb_date": "2027-03-01", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057643v.htm"}, {"id": "2649702", "date": "2027-03-07T17:30:00Z", "round": "27", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "卡利亚里", "abbr": "", "score": null, "winner": false, "logo": "assets/1e2982dbc4e2.png"}, "zb_date": "2027-03-08", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057654v.htm"}, {"id": "2649714", "date": "2027-03-14T17:30:00Z", "round": "28", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "萨索洛", "abbr": "", "score": null, "winner": false, "logo": "assets/fff724db5ce2.png"}, "zb_date": "2027-03-15", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057666v.htm"}, {"id": "2649724", "date": "2027-03-21T17:30:00Z", "round": "29", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "亚特兰大", "abbr": "", "score": null, "winner": false, "logo": "assets/5b92f5453a65.png"}, "zb_date": "2027-03-22", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057676v.htm"}, {"id": "2649730", "date": "2027-04-04T16:30:00Z", "round": "30", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "蒙扎", "abbr": "", "score": null, "winner": false, "logo": "assets/b51c6bb1e730.png"}, "zb_date": "2027-04-05", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057682v.htm"}, {"id": "2649739", "date": "2027-04-11T16:30:00Z", "round": "31", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "佛罗伦萨", "abbr": "", "score": null, "winner": false, "logo": "assets/f0da3683822d.png"}, "zb_date": "2027-04-12", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057691v.htm"}, {"id": "2649747", "date": "2027-04-18T16:30:00Z", "round": "32", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "那不勒斯", "abbr": "", "score": null, "winner": false, "logo": "assets/40c9709a2ce7.png"}, "zb_date": "2027-04-19", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057699v.htm"}, {"id": "2649761", "date": "2027-04-25T16:30:00Z", "round": "33", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "莱切", "abbr": "", "score": null, "winner": false, "logo": "assets/5f93a144547a.png"}, "zb_date": "2027-04-26", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057713v.htm"}, {"id": "2649773", "date": "2027-05-02T16:30:00Z", "round": "34", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "拉齐奥", "abbr": "", "score": null, "winner": false, "logo": "assets/0a6d861eda83.png"}, "zb_date": "2027-05-03", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057725v.htm"}, {"id": "2649776", "date": "2027-05-09T16:30:00Z", "round": "35", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "帕尔马", "abbr": "", "score": null, "winner": false, "logo": "assets/7a0ff388e85d.png"}, "zb_date": "2027-05-10", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057728v.htm"}, {"id": "2649787", "date": "2027-05-16T16:30:00Z", "round": "36", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "罗马", "abbr": "", "score": null, "winner": false, "logo": "assets/5e137990bd43.png"}, "zb_date": "2027-05-17", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057739v.htm"}, {"id": "2649799", "date": "2027-05-23T16:30:00Z", "round": "37", "competition": "意甲", "state": "pre", "isHome": false, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "威尼斯", "abbr": "", "score": null, "winner": false, "logo": "assets/bb2f13e787fc.png"}, "zb_date": "2027-05-24", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057751v.htm"}, {"id": "2649814", "date": "2027-05-30T16:30:00Z", "round": "38", "competition": "意甲", "state": "pre", "isHome": true, "milan": {"name": "AC米兰", "score": null, "winner": false, "logo": "assets/5b7b126751fe.png"}, "opp": {"name": "乌迪内斯", "abbr": "", "score": null, "winner": false, "logo": "assets/b3594f65d5e2.png"}, "zb_date": "2027-05-31", "detail": "https://www.zhibo8.com/zhibo/zuqiu/2027/match2057766v.htm"}]}, "standings": {"updated": "2026-09-01T01:05:14.284406+00:00", "entries": [{"id": "2428", "name": "罗马", "logo": "assets/6a63c3f979fc.png", "isMilan": false, "rank": 1, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 8, "GA": 0, "GD": 8, "Pts": 6}, {"id": "41", "name": "国际米兰", "logo": "assets/b16c14bc0b6c.png", "isMilan": false, "rank": 2, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 5, "GA": 1, "GD": 4, "Pts": 6}, {"id": "40", "name": "AC米兰", "logo": "assets/f62b86a7f8e7.png", "isMilan": true, "rank": 3, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 4, "GA": 1, "GD": 3, "Pts": 6}, {"id": "2353", "name": "尤文图斯", "logo": "assets/853a092bd746.png", "isMilan": false, "rank": 4, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 3, "GA": 0, "GD": 3, "Pts": 6}, {"id": "2423", "name": "亚特兰大", "logo": "assets/3b13a04da624.png", "isMilan": false, "rank": 5, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 3, "GA": 1, "GD": 2, "Pts": 6}, {"id": "2424", "name": "拉齐奥", "logo": "assets/b9c7cc79f8e2.png", "isMilan": false, "rank": 6, "P": 2, "W": 2, "D": 0, "L": 0, "GF": 2, "GA": 0, "GD": 2, "Pts": 6}, {"id": "2427", "name": "乌迪内斯", "logo": "assets/894e0696f849.png", "isMilan": false, "rank": 7, "P": 2, "W": 1, "D": 1, "L": 0, "GF": 4, "GA": 3, "GD": 1, "Pts": 4}, {"id": "592", "name": "科莫", "logo": "assets/53d20325e723.png", "isMilan": false, "rank": 8, "P": 2, "W": 1, "D": 1, "L": 0, "GF": 3, "GA": 2, "GD": 1, "Pts": 4}, {"id": "902", "name": "弗罗西诺内", "logo": "assets/a57718fa304c.png", "isMilan": false, "rank": 9, "P": 2, "W": 1, "D": 0, "L": 1, "GF": 3, "GA": 1, "GD": 2, "Pts": 3}, {"id": "2429", "name": "那不勒斯", "logo": "assets/df8addfa835e.png", "isMilan": false, "rank": 10, "P": 2, "W": 1, "D": 0, "L": 1, "GF": 3, "GA": 2, "GD": 1, "Pts": 3}, {"id": "202", "name": "萨索洛", "logo": "assets/889df04f6762.png", "isMilan": false, "rank": 11, "P": 2, "W": 1, "D": 0, "L": 1, "GF": 3, "GA": 3, "GD": 0, "Pts": 3}, {"id": "2436", "name": "卡利亚里", "logo": "assets/d36da0f87b24.png", "isMilan": false, "rank": 12, "P": 2, "W": 1, "D": 0, "L": 1, "GF": 1, "GA": 1, "GD": 0, "Pts": 3}, {"id": "2422", "name": "莱切", "logo": "assets/c97ba8e54c63.png", "isMilan": false, "rank": 13, "P": 2, "W": 1, "D": 0, "L": 1, "GF": 2, "GA": 4, "GD": -2, "Pts": 3}, {"id": "203", "name": "都灵", "logo": "assets/867fe1a4ba89.png", "isMilan": false, "rank": 14, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 2, "GA": 4, "GD": -2, "Pts": 0}, {"id": "2435", "name": "博洛尼亚", "logo": "assets/49200e2a1a17.png", "isMilan": false, "rank": 15, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 0, "GA": 2, "GD": -2, "Pts": 0}, {"id": "2425", "name": "热那亚", "logo": "assets/ad90a2b0bf3d.png", "isMilan": false, "rank": 16, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 0, "GA": 3, "GD": -3, "Pts": 0}, {"id": "2437", "name": "帕尔马", "logo": "assets/2748f5ed3fc6.png", "isMilan": false, "rank": 17, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 0, "GA": 3, "GD": -3, "Pts": 0}, {"id": "582", "name": "蒙扎", "logo": "assets/915034a942e3.png", "isMilan": false, "rank": 18, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 3, "GA": 7, "GD": -4, "Pts": 0}, {"id": "3468", "name": "威尼斯", "logo": "assets/c0ea2f9c15b8.png", "isMilan": false, "rank": 19, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 0, "GA": 4, "GD": -4, "Pts": 0}, {"id": "2431", "name": "佛罗伦萨", "logo": "assets/597e31b318a9.png", "isMilan": false, "rank": 20, "P": 2, "W": 0, "D": 0, "L": 2, "GF": 0, "GA": 7, "GD": -7, "Pts": 0}]}, "squad": {"goals": {"阿德里安·拉比奥": 1, "阿尔法乔·西塞": 1, "贡萨洛·拉莫斯": 1}, "assists": {"萨穆埃尔·丘库埃泽": 1, "阿德里安·拉比奥": 1, "亚历克西斯·萨勒马科尔斯": 1}}, "analysis": {"title": "队内数据王", "kings": [{"stat": "出场", "key": "appearCount", "value": "2", "players": ["帕夫洛维奇", "拉比奥", "拉莫斯"]}, {"stat": "进球", "key": "goals", "value": "1", "players": ["拉比奥", "拉莫斯", "西塞"]}, {"stat": "助攻", "key": "goalAssist", "value": "1", "players": ["拉比奥", "楚克乌泽", "萨勒马克尔斯"]}, {"stat": "射门", "key": "totalScoringAtt", "value": "13", "players": ["拉莫斯"]}, {"stat": "传球", "key": "totalPass", "value": "133", "players": ["吉拉"]}, {"stat": "关键传球", "key": "keyPass", "value": "6", "players": ["楚克乌泽", "洛夫图斯-奇克"]}, {"stat": "抢断", "key": "totalTackle", "value": "7", "players": ["帕夫洛维奇"]}], "overview": {"rank": 3, "rankDesc": "排名", "records": {"win": 2, "draw": 0, "lose": 0}, "last5": ["胜", "胜"]}, "basics": [{"name": "进球", "key": "goals", "value": "4", "avg": "2.4", "max": "8", "rank": 3}, {"name": "失球", "key": "goalsConceded", "value": "1", "avg": "2.4", "max": "7", "rank": 12}, {"name": "控球率", "key": "possessionPercentage", "value": "58%", "avg": "50%", "max": "67%", "rank": 6}, {"name": "助攻", "key": "goalAssist", "value": "3", "avg": "1.8", "max": "5", "rank": 3}, {"name": "射正", "key": "ontargetScoringAtt", "value": "9", "avg": "8.2", "max": "16", "rank": 6}, {"name": "点球", "key": "attPenGoal", "value": "0", "avg": "0", "max": "0", "rank": 0}, {"name": "传球", "key": "totalPass", "value": "1,055", "avg": "882.4", "max": "1,392", "rank": 0}, {"name": "关键传球", "key": "keyPass", "value": "30", "avg": "19.9", "max": "34", "rank": 0}, {"name": "拦截", "key": "interception", "value": "10", "avg": "15.6", "max": "35", "rank": 16}, {"name": "抢断", "key": "totalTackle", "value": "34", "avg": "30.4", "max": "54", "rank": 5}, {"name": "解围", "key": "totalClearance", "value": "43", "avg": "38.9", "max": "62", "rank": 7}, {"name": "犯规", "key": "fkFoulLost", "value": "17", "avg": "21.9", "max": "41", "rank": 15}, {"name": "红牌", "key": "redCard", "value": "0", "avg": "0", "max": "0", "rank": 0}, {"name": "黄牌", "key": "yellowCard", "value": "2", "avg": "3.1", "max": "5", "rank": 16}]}, "scorers": {"2649434": {"events": [{"min": "90", "type": "进球", "mine": false, "scorer": "切·亚当斯", "score": "1-2", "assist": "格维达斯"}, {"min": "85", "type": "换人", "mine": false, "down": "彼得罗·科穆佐", "up": "桑德罗·库列诺维奇"}, {"min": "81", "type": "换人", "mine": false, "down": "阿莱西奥·卡恰马尼", "up": "扎卡里亚·阿布赫拉尔"}, {"min": "76", "type": "换人", "mine": true, "down": "马里奥·希拉", "up": "马特奥·加比亚"}, {"min": "70", "type": "换人", "mine": false, "down": "切萨雷·卡萨迪", "up": "切·亚当斯"}, {"min": "66", "type": "进球", "mine": true, "scorer": "阿德里安·拉比奥", "score": "0-2", "assist": "萨穆埃尔·丘库埃泽"}, {"min": "66", "type": "换人", "mine": true, "down": "佩韦斯·埃斯图皮尼安", "up": "达维徳·巴特萨吉"}, {"min": "64", "type": "进球", "mine": true, "scorer": "阿尔法乔·西塞", "score": "0-1", "assist": "阿德里安·拉比奥"}, {"min": "56", "type": "换人", "mine": true, "down": "鲁宾·洛夫图斯·奇克", "up": "阿德里安·拉比奥"}, {"min": "52", "type": "黄牌", "mine": true, "player": ["鲁宾·洛夫图斯·奇克"]}, {"min": "", "type": "start", "mine": false, "player": ""}], "stats": {"left": "都灵", "right": "AC米兰", "items": [{"title": "进球", "left": 1, "right": 2}, {"title": "控球率", "left": 41, "right": 59}, {"title": "进攻", "left": 80, "right": 96}, {"title": "危险进攻", "left": 33, "right": 51}, {"title": "射正", "left": 1, "right": 4}, {"title": "射偏", "left": 5, "right": 9}, {"title": "角球", "left": 2, "right": 4}, {"title": "点球", "left": 0, "right": 0}, {"title": "黄牌", "left": 0, "right": 1}, {"title": "红牌", "left": 0, "right": 0}]}}, "2649446": {"events": [{"min": "89", "type": "乌龙球", "mine": true, "scorer": "拉德万·哈勒哈勒", "score": "2-0", "assist": ""}, {"min": "87", "type": "换人", "mine": true, "down": "达维徳·巴特萨吉", "up": "佩韦斯·埃斯图皮尼安"}, {"min": "80", "type": "换人", "mine": false, "down": "恩里克·佩雷斯·穆尼奥斯", "up": "阿尔比恩·拉赫马尼"}, {"min": "74", "type": "换人", "mine": true, "down": "卢卡·莫德里奇", "up": "阿尔东·亚沙里"}, {"min": "71", "type": "黄牌", "mine": true, "player": ["斯特拉希尼亚·帕夫洛维奇"]}, {"min": "69", "type": "进球", "mine": true, "scorer": "贡萨洛·拉莫斯", "score": "1-0", "assist": "亚历克西斯·萨勒马科尔斯"}, {"min": "66", "type": "换人", "mine": false, "down": "里奇西亚诺·哈普斯", "up": "蒂埃里·科雷亚"}, {"min": "65", "type": "换人", "mine": false, "down": "托马·巴希奇", "up": "西蒙·索姆"}, {"min": "59", "type": "换人", "mine": true, "down": "鲁宾·洛夫图斯·奇克", "up": "亚历克西斯·萨勒马科尔斯"}, {"min": "54", "type": "黄牌", "mine": false, "player": ["里奇西亚诺·哈普斯"]}, {"min": "48", "type": "黄牌", "mine": false, "player": ["恩里克·佩雷斯·穆尼奥斯"]}, {"min": "45", "type": "换人", "mine": false, "down": "巴托·弗兰季奇", "up": "拉德万·哈勒哈勒"}, {"min": "27", "type": "黄牌", "mine": false, "player": ["乔尔·辛蒂安"]}, {"min": "", "type": "start", "mine": false, "player": ""}], "stats": {"left": "AC米兰", "right": "威尼斯", "items": [{"title": "进球", "left": 2, "right": 0}, {"title": "控球率", "left": 58, "right": 42}, {"title": "进攻", "left": 92, "right": 99}, {"title": "危险进攻", "left": 46, "right": 34}, {"title": "射正", "left": 5, "right": 2}, {"title": "射偏", "left": 9, "right": 3}, {"title": "角球", "left": 2, "right": 3}, {"title": "点球", "left": 0, "right": 0}, {"title": "黄牌", "left": 1, "right": 3}, {"title": "红牌", "left": 0, "right": 0}]}}}, "buildTime": "2026-09-01 09:05:14"};
+let FILTER = "all";
+function bj(d){return new Date(d).toLocaleString("zh-CN",{timeZone:"Asia/Shanghai"});}
+function bjDate(d){return new Date(d).toLocaleDateString("zh-CN",{timeZone:"Asia/Shanghai",month:"2-digit",day:"2-digit"});}
+function bjTime(d){return new Date(d).toLocaleTimeString("zh-CN",{timeZone:"Asia/Shanghai",hour:"2-digit",minute:"2-digit"});}
+const ini=s=>(s||"").trim()[0]||"";
+const badge=(n,logo,acm)=>`<span class="badge${acm?" acm":""}"><span class="ini">${ini(n)}</span><img src="${logo}" onload="this.parentElement.classList.add('ld')" onerror="this.remove()"></span>`;
+function card(e){
+  const opp=e.opp, mil=e.milan;
+  const home = e.isHome ? mil : opp;
+  const away = e.isHome ? opp : mil;
+  const homeIsMilan = e.isHome;
+  const awayIsMilan = !e.isHome;
+  let mid;
+  if(e.state==="post"){
+    const r=e.milan.winner?"W":(e.opp.winner?"L":"D");
+    const rt={W:"胜",L:"负",D:"平"}[r];
+    mid=`<div class="score">${e.milan.score??"-"}-${e.opp.score??"-"}</div><span class="res ${r}">${rt}</span>`;
+  } else if(e.state==="in"){
+    mid=`<div class="score">${e.milan.score??"0"}-${e.opp.score??"0"}</div><span class="res LIVE">进行中</span>`;
+  } else {
+    mid=`<div class="vs">VS</div>`;
+  }
+  const exp = e.state==="post" ? `<button class="exp" onclick="toggleDet('${e.id}')">赛况/统计 ▾</button>` : "";
+  const det  = e.state==="post" ? `<div class="det" id="det-${e.id}" style="display:none"></div>` : "";
+  return `<div class="card">
+    <div class="when"><div class="d">${bjDate(e.date)}</div><div class="t">${bjTime(e.date)}</div><div class="c">${e.competition}${e.round? " · 第"+e.round+"轮":""}</div></div>
+    <div class="hteam"><span class="nm">${home.name}</span>${badge(home.name,home.logo,homeIsMilan)}</div>
+    <div class="mid">${mid}</div>
+    <div class="ateam">${badge(away.name,away.logo,awayIsMilan)}<span class="nm">${away.name}</span></div>
+    <div class="meta"><span><a href="${e.detail||'#'}" target="_blank">直播吧详情</a></span>${exp}</div>
+    ${det}
+  </div>`;
+}
+function render(){
+  const list=document.getElementById("list");
+  const nb=document.getElementById("nextBox");
+  nb.style.display="none";
+  if(FILTER==="standings"){renderStandings();return;}
+  if(FILTER==="squad"){renderSquad();return;}
+  if(FILTER==="analysis"){renderAnalysis();return;}
+  const ev=DATA.schedule.events.slice();
+  const results=ev.filter(e=>e.state==="post").sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const fixtures=ev.filter(e=>e.state!=="post").sort((a,b)=>new Date(a.date)-new Date(b.date));
+  if(fixtures.length){
+    const k=fixtures[0];
+    nb.style.display="block";
+    nb.innerHTML=`<div class="lbl">下一场 · ${k.competition}</div><div class="cd">${k.isHome?"主":"客"} vs ${k.opp.name}</div><div class="meta" style="margin-top:4px">${bj(k.date)} 开球</div>`;
+  } else { nb.style.display="none"; }
+  let html="";
+  if(FILTER==="all"||FILTER==="pre"){
+    if(fixtures.length){html+=`<div class="seg">赛程</div>`+fixtures.map(card).join("");}
+    else if(FILTER==="pre") html+=`<div class="empty">暂无未赛场次</div>`;
+  }
+  if(FILTER==="all"||FILTER==="post"){
+    if(results.length){html+=`<div class="seg">赛果</div>`+results.map(card).join("");}
+    else if(FILTER==="post") html+=`<div class="empty">暂无赛果</div>`;
+  }
+  if(!html) html=`<div class="empty">暂无数据</div>`;
+  list.innerHTML=html;
+}
+function renderStandings(){
+  const data=DATA.standings.entries;
+  if(!data.length){document.getElementById("list").innerHTML='<div class="empty">暂无积分数据</div>';return;}
+  const rows=data.map(e=>`<tr class="${e.isMilan?'me':''}">
+    <td class="rk">${e.rank}</td>
+    <td class="tm">${badge(e.name,e.logo,e.isMilan)}${e.name}</td>
+    <td>${e.P}</td>
+    <td class="wdl">${e.W}/${e.D}/${e.L}</td>
+    <td class="gl">${e.GF}/${e.GA}</td>
+    <td class="pts">${e.Pts}</td></tr>`).join("");
+  document.getElementById("list").innerHTML=`<div class="seg">意甲积分榜 2026-2027 · 数据：腾讯体育</div>
+    <div class="tblwrap"><table class="st"><thead><tr><th>#</th><th>球队</th><th>场</th><th>胜/平/负</th><th>进/失</th><th>积分</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+function renderSquad(){
+  const g=DATA.squad.goals||{}, a=DATA.squad.assists||{};
+  const gA=Object.entries(g).sort((x,y)=>y[1]-x[1]);
+  const aA=Object.entries(a).sort((x,y)=>y[1]-x[1]);
+  const maxG=Math.max(1,...gA.map(x=>x[1])), maxA=Math.max(1,...aA.map(x=>x[1]));
+  const lb=(arr,max)=>arr.length?arr.map((x,i)=>`<div class="lb"><span class="rn">${i+1}</span><span class="nm">${x[0]}</span><span class="bar"><i style="width:${Math.round(x[1]/max*100)}%"></i></span><span class="ct">${x[1]}</span></div>`).join(""):'<div class="empty">暂无数据</div>';
+  document.getElementById("list").innerHTML=`<div class="seg">AC米兰 队内榜 2026-2027（按已赛场次进球/助攻事件聚合）</div>
+    <div class="squad"><div class="panel"><div class="ph">⚽ 射手榜</div>${lb(gA,maxG)}</div><div class="panel"><div class="ph">🅰️ 助攻榜</div>${lb(aA,maxA)}</div></div>`;
+}
+function renderAnalysis(){
+  const an = DATA.analysis || {};
+  if(!an.kings || !an.kings.length){ document.getElementById("list").innerHTML='<div class="empty">暂无数据</div>'; return; }
+  const ov = an.overview || {};
+  let ovHtml = "";
+  if(ov.rank){
+    const rec = ov.records || {};
+    const WDL = {"胜":"W","负":"L","平":"D"};
+    const last5 = (ov.last5||[]).map(x=>WDL[x]||"D").join(" ");
+    ovHtml = `<div class="ov">
+      <div class="o"><b>${ov.rank}</b><span>${ov.rankDesc||"排名"}</span></div>
+      <div class="o"><b>${(rec.win??0)}-${(rec.draw??0)}-${(rec.lose??0)}</b><span>胜-平-负</span></div>
+      <div class="o"><b>${(ov.last5||[]).length}</b><span>近5场</span><div class="last5">${last5||"—"}</div></div>
+    </div>`;
+  }
+  let basicHtml="";
+  const basics=an.basics||[];
+  if(basics.length){
+    const brows=basics.map(b=>`<tr><td>${b.name}</td><td class="bval">${b.value ?? "-"}</td><td>${b.avg ?? "-"}</td><td class="brk">${b.rank?("#"+b.rank):"—"}</td></tr>`).join("");
+    basicHtml=`<div class="seg">基础数据 · 2026-2027 · 数据：腾讯体育</div>
+      <div class="tblwrap"><table class="bt"><thead><tr><th>数据</th><th>总计</th><th>场均</th><th>联赛排名</th></tr></thead><tbody>${brows}</tbody></table></div>`;
+  }
+  const rows = an.kings.map(k=>`<div class="krow"><span class="kstat">${k.stat}</span>${k.players.map(p=>`<span class="pchip">${p}</span>`).join("")}<span class="kval">${k.value ?? ""}</span></div>`).join("");
+  const kingHtml=`<div class="seg" style="margin-top:18px">队内数据 · 2026-2027 · 数据：腾讯体育</div>${ovHtml}<div class="king"><div class="kh">${an.title||"队内数据王"}</div>${rows}</div>`;
+  document.getElementById("list").innerHTML=basicHtml+kingHtml;
+}
+window.toggleDet=function(id){
+  const el=document.getElementById("det-"+id); if(!el) return;
+  if(el.dataset.loaded==="1"){ el.style.display = el.style.display==="none"?"block":"none"; return; }
+  const d = DATA.scorers[id];
+  if(!d){ el.innerHTML='<div class="empty">暂无数据</div>'; el.dataset.loaded="1"; el.style.display="block"; return; }
+  const evs = d.events||[];
+  const evHtml = evs.length ? evs.map(function(s){
+    if(s.type==="换人"){
+      return '<div class="goal"><span class="as">'+s.min+'′ 换人</span> '+(s.down||"")+' → <b>'+(s.up||"")+'</b></div>';
+    }
+    const tag = s.type==="乌龙球" ? "乌龙" : (s.type||"");
+    const who = s.scorer ? '<b>'+s.scorer+'</b>' : (s.player?('<b>'+s.player+'</b>'):"");
+    let gl='<div class="goal '+(s.mine?'mine':'')+'">'+s.min+'′ '+tag+' '+who;
+    if(s.score){ gl+=' <span class="as">'+s.score+'</span>'; }
+    if(s.assist){ gl+=' <span class="as">助攻 '+s.assist+'</span>'; }
+    return gl+'</div>';
+  }).join("") : '<div class="empty">暂无进球记录</div>';
+  let stHtml="";
+  const st=d.stats;
+  if(st && st.items && st.items.length){
+    const rows=st.items.map(function(x){
+      return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:12px">'
+        +'<span style="flex:1;text-align:right;font-weight:700;font-variant-numeric:tabular-nums">'+x.left+'</span>'
+        +'<span style="width:60px;text-align:center;color:var(--mut);flex:none">'+x.title+'</span>'
+        +'<span style="flex:1;text-align:left;font-weight:700;font-variant-numeric:tabular-nums">'+x.right+'</span></div>';
+    }).join("");
+    stHtml='<div class="seg" style="margin-top:10px">技术统计</div><div style="font-size:11px;margin-bottom:2px">'+st.left+' vs '+st.right+'</div>'+rows;
+  }
+  el.innerHTML='<div class="seg">赛况</div>'+evHtml+stHtml;
+  el.dataset.loaded="1"; el.style.display="block";
+};
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));t.classList.add("on");FILTER=t.dataset.f;render();});
+document.getElementById("upd").textContent = "数据更新于 " + (DATA.buildTime || "");
+render();
+</script>
+</body></html>
